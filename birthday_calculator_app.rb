@@ -12,5 +12,5 @@ before do
 end
 
 get '/' do
-  birthday_calculator.persons.map { |person| person.to_h }.to_json
+  birthday_calculator.persons.map(&:to_h).to_json
 end

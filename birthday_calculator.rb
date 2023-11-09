@@ -8,6 +8,7 @@ Person = Struct.new(:name, :birthday, :days_remaining)
 # Birthday Calculator
 class BirthdayCalculator
   attr_reader :persons
+
   BIRTHDAY_FILE = 'birthday.json'
 
   def initialize
