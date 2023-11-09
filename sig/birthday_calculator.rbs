@@ -1,0 +1,25 @@
+type person_type = { name: String, birthday: Date, days_remaining: Integer }
+
+Person: person_type
+
+# Birthday Calculator
+class BirthdayCalculator
+  BIRTHDAY_FILE: String
+
+  @days_until_end_of_the_year: Integer
+  @persons: Array[person_type]
+
+  @today: Date
+
+  attr_reader persons: Array[person_type]
+
+  def initialize: () -> void
+
+  def parse_data: () -> Array[person_type]
+
+  def print_days_remaining: () -> void
+
+  private
+
+  def calculate_days_remaining: (Date birthday) -> Integer
+end
