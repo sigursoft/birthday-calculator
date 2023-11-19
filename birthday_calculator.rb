@@ -29,7 +29,7 @@ class BirthdayCalculator
 
   def print_days_remaining
     @persons.each do |person|
-      puts "#{person['name']}: #{person.birthday.strftime('%d %B')} - #{person.days_remaining} days remaining"
+      puts "#{person['name']}: #{person.birthday.strftime('%-d %B')} - #{person.days_remaining} days remaining"
     end
   end
 
