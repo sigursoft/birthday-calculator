@@ -1,0 +1,5 @@
+class Person
+  attr_accessor birthday: Date
+  attr_accessor days_remaining: Integer
+  attr_accessor name: String
+end

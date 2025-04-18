@@ -3,7 +3,15 @@
 require 'json'
 require 'date'
 
-Person = Struct.new(:name, :birthday, :days_remaining)
+class Person
+  attr_reader :name, :birthday, :days_remaining
+
+  def initialize(name, birthday, days_remaining)
+    @name = name
+    @birthday = birthday
+    @days_remaining = days_remaining
+  end
+end
 
 # Birthday Calculator
 class BirthdayCalculator
@@ -29,7 +37,7 @@ class BirthdayCalculator
 
   def print_days_remaining
     @persons.each do |person|
-      puts "#{person['name']}: #{person.birthday.strftime('%-d %B')} - #{person.days_remaining} days remaining"
+      puts "#{person.name}: #{person.birthday.strftime('%-d %B')} - #{person.days_remaining} days remaining"
     end
   end
 
