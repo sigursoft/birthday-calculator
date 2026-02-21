@@ -1,0 +1,18 @@
+class TestPerson < Minitest::Test
+  def test_person_initialization: () -> void
+end
+
+class TestBirthdayCalculator < Minitest::Test
+  @db_config: Hash[Symbol, String]
+  @calculator: BirthdayCalculator?
+
+  def setup: () -> void
+  def test_initialization_with_config: () -> void
+  def test_initialization_without_credentials_raises_error: () -> void
+  def test_calculate_days_remaining_future_birthday: () -> void
+  def test_calculate_days_remaining_past_birthday: () -> void
+
+  private
+
+  def skip_db_connection: () { () -> void } -> void
+end

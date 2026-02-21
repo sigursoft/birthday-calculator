@@ -4,8 +4,10 @@ require 'sinatra'
 require 'json'
 require './birthday_calculator'
 
-birthday_calculator = BirthdayCalculator.new
-birthday_calculator.parse_data
+BIRTHDAY_FILE = 'birthday.json'
+
+birthday_calculator = BirthdayCalculator.new(BIRTHDAY_FILE)
+birthday_calculator.load_data
 
 before do
   content_type :json

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require 'json'
+require 'dotenv/load'
+require 'sequel'
 require 'date'
 
 class Person
@@ -17,20 +18,24 @@ end
 class BirthdayCalculator
   attr_reader :persons
 
-  BIRTHDAY_FILE = 'birthday.json'
-
-  def initialize
+  def initialize(db_config = {})
+    @db = Sequel.connect(
+      adapter: 'mysql2',
+      host: db_config[:host] || ENV['DB_HOST'] || '127.0.0.1',
+      user: db_config[:username] || ENV['DB_USERNAME'] || raise('DB_USERNAME required'),
+      password: db_config[:password] || ENV['DB_PASSWORD'] || raise('DB_PASSWORD required'),
+      database: db_config[:database] || ENV['DB_NAME'] || 'birthdays'
+    )
     @persons = []
     @today = Date.today
     @days_until_end_of_the_year = Date.new(@today.year, 12, 31).yday - @today.yday
   end
 
-  def parse_data
-    file = File.read(BIRTHDAY_FILE)
-    JSON.parse(file).map! do |person|
-      birthday = Date.parse("#{person['day']} #{person['month']}")
+  def load_data
+    @db[:birthdays].select(:name, :day, :month).each do |row|
+      birthday = Date.parse("#{row[:day]} #{row[:month]}")
       days_remaining = calculate_days_remaining(birthday)
-      @persons << Person.new(person['name'], birthday, days_remaining)
+      @persons << Person.new(row[:name], birthday, days_remaining)
     end
     @persons.sort_by!(&:days_remaining)
   end

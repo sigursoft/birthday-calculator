@@ -1,21 +1,17 @@
-type person_type = { name: String, birthday: Date, days_remaining: Integer }
-
-Person: person_type
+type db_config = { host: String?, username: String?, password: String?, database: String? }
 
 # Birthday Calculator
 class BirthdayCalculator
-  BIRTHDAY_FILE: String
-
+  @db: Sequel::Database
   @days_until_end_of_the_year: Integer
-  @persons: Array[person_type]
-
+  @persons: Array[Person]
   @today: Date
 
-  attr_reader persons: Array[person_type]
+  attr_reader persons: Array[Person]
 
-  def initialize: () -> void
+  def initialize: (?db_config) -> void
 
-  def parse_data: () -> Array[person_type]
+  def load_data: () -> Array[Person]
 
   def print_days_remaining: () -> void
 

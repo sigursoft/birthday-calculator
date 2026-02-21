@@ -1,0 +1,6 @@
+CREATE TABLE birthdays (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    day TINYINT NOT NULL,
+    month VARCHAR(20) NOT NULL
+);
