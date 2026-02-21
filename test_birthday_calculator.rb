@@ -28,7 +28,9 @@ class TestBirthdayCalculator < Minitest::Test
     skip_db_connection do
       @calculator = BirthdayCalculator.new(@db_config)
       assert_instance_of BirthdayCalculator, @calculator
-      assert_empty @calculator.persons
+      assert_respond_to @calculator, :persons
+      persons = @calculator.send(:persons)
+      assert_empty persons
     end
   end
 

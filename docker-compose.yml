@@ -1,8 +1,9 @@
 services:
   mariadb:
     image: mariadb:11.8.6
+    command: --innodb-use-native-aio=0
     environment:
-      MARIADB_ROOT_PASSWORD: root
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
       MARIADB_DATABASE: birthdays
     volumes:
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
