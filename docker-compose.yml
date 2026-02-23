@@ -1,6 +1,6 @@
 services:
   mariadb:
-    image: mariadb:11.8.6
+    image: mariadb:12.2.2
     command: --innodb-use-native-aio=0
     environment:
       MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
@@ -9,3 +9,21 @@ services:
       - ./sql/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  birthday-calculator:
+    image: localhost/birthday-calculator:latest
+    environment:
+      DB_HOST: mariadb
+      DB_USERNAME: root
+      DB_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      DB_NAME: birthdays
+    ports:
+      - "4567:4567"
+    depends_on:
+      mariadb:
+        condition: service_healthy

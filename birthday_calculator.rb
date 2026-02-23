@@ -12,6 +12,10 @@ class Person
     @birthday = birthday
     @days_remaining = days_remaining
   end
+
+  def to_h
+    { name: @name, birthday: @birthday, days_remaining: @days_remaining }
+  end
 end
 
 # Birthday Calculator

@@ -8,6 +8,8 @@ Gem::Specification.new do |gem|
   gem.description = 'Birthday Calculator'
   gem.authors = ['Anton Kozik']
   gem.email = 'pazitron@gmail.com'
+  gem.add_dependency 'rackup', '~> 2.3'
+  gem.add_dependency 'puma', '~> 7.2'
   gem.add_dependency 'sinatra', '~> 4.2'
   gem.add_dependency 'ostruct', '~> 0.6'
   gem.add_dependency 'sequel', '~> 5.0'
